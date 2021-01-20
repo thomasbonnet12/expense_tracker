@@ -21,10 +21,22 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Expense Tracker'),
-      ),
-      body: Center(child: Text('Body text')),
-    );
+        appBar: AppBar(
+          title: Text('Expense Tracker'),
+        ),
+        body: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              child: Card(
+                color: Colors.blue,
+                child: Text('Chart'),
+              ),
+            ),
+            Card(
+              child: Text('List of TX'),
+            ),
+          ],
+        ));
   }
 }
