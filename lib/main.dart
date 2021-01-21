@@ -1,9 +1,5 @@
-import 'package:expense_tracker_app/models/transaction.dart';
-import 'package:expense_tracker_app/widget/new_transaction.dart';
-import 'package:expense_tracker_app/widget/transaction_list.dart';
 import 'package:expense_tracker_app/widget/user_transaction.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 void main() {
   runApp(MyApp());
