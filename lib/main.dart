@@ -34,13 +34,36 @@ class MyHomePage extends StatelessWidget {
           title: Text('Expense Tracker'),
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
               width: double.infinity,
               child: Card(
                 color: Colors.blue,
                 child: Text('data'),
+              ),
+            ),
+            Card(
+              elevation: 5,
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Title'),
+                    ),
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Amount'),
+                    ),
+                    FlatButton(
+                      onPressed: () {},
+                      child: Text('Add a transaction'),
+                      textColor: Colors.purple,
+                    ),
+                  ],
+                ),
               ),
             ),
             Column(
