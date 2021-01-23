@@ -20,10 +20,11 @@ class MyApp extends StatelessWidget {
           accentColor: Colors.amber,
           fontFamily: 'Quicksand',
           textTheme: ThemeData.light().textTheme.copyWith(
-              headline6: TextStyle(
-                  fontFamily: 'OpenSansCondensed',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18)),
+                headline6: TextStyle(
+                    fontFamily: 'OpenSansCondensed',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
+              ),
           appBarTheme: AppBarTheme(
             textTheme: ThemeData.light().textTheme.copyWith(
                   headline6: TextStyle(
