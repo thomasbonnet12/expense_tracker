@@ -14,14 +14,14 @@ class TransactionList extends StatelessWidget {
       child: transactions.isEmpty
           ? Column(
               children: [
-                Text('No transaction done yet',
+                Text('Add a transaction',
                     style: Theme.of(context).textTheme.headline6),
-                Expanded(
-                  child: Image.asset(
-                    'assets/images/Oups (1).png',
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                // Expanded(
+                //   child: Image.asset(
+                //     'assets/images/Oups (1).png',
+                //     fit: BoxFit.cover,
+                //   ),
+                // ),
               ],
             )
           : ListView.builder(
