@@ -1,7 +1,7 @@
 import 'package:expense_tracker_app/models/transaction.dart';
 import 'package:expense_tracker_app/widget/new_transaction.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+
 import './models/transaction.dart';
 import './widget/transaction_list.dart';
 
@@ -14,9 +14,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Expense Tracker',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
+        accentColor: Colors.amber,
       ),
       home: MyHomePage(),
     );
