@@ -62,6 +62,12 @@ flutter:
           style: italic
         - asset: assets/fonts/OpenSansCondensed-Bold.ttf
           weight: 700
+    - family: Oxygen
+      fonts:
+        - asset: assets/fonts/Oxygen-Light.ttf
+        - asset: assets/fonts/Oxygen-Regular.ttf
+        - asset: assets/fonts/Oxygen-Bold.ttf
+          weight: 700
     - family: Quicksand
       fonts:
         - asset: assets/fonts/Quicksand-Regular.ttf

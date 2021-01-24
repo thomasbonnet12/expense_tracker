@@ -22,14 +22,15 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Quicksand',
           textTheme: ThemeData.light().textTheme.copyWith(
                 headline6: TextStyle(
-                    fontFamily: 'OpenSansCondensed',
+                    fontFamily: 'Oxygen',
                     fontWeight: FontWeight.bold,
                     fontSize: 18),
+                button: TextStyle(color: Colors.white),
               ),
           appBarTheme: AppBarTheme(
             textTheme: ThemeData.light().textTheme.copyWith(
                   headline6: TextStyle(
-                    fontFamily: 'OpenSansCondensed',
+                    fontFamily: 'Oxygen',
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
