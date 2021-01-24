@@ -51,10 +51,10 @@ class _MyHomePageState extends State<MyHomePage> {
   final amountController = TextEditingController();
 
   final List<Transaction> _userTransactions = [
-    Transaction(
-        id: 'T1', title: "New T-shirt", amount: 71.80, date: DateTime.now()),
-    Transaction(
-        id: 'T2', title: "New Shoes", amount: 44.80, date: DateTime.now())
+    // Transaction(
+    //     id: 'T1', title: "New T-shirt", amount: 71.80, date: DateTime.now()),
+    // Transaction(
+    //     id: 'T2', title: "New Shoes", amount: 44.80, date: DateTime.now())
   ];
 
   List<Transaction> get _recentTransactions {
@@ -90,6 +90,14 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  void _deletedTransaction(String id) {
+    setState(() {
+      _userTransactions.removeWhere((tx) {
+        return tx.id == id;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Chart(_recentTransactions),
-            TransactionList(_userTransactions),
+            TransactionList(_userTransactions, _deletedTransaction),
           ],
         ),
       ),
