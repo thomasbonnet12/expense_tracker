@@ -1,11 +1,12 @@
 import 'package:expense_tracker_app/models/transaction.dart';
+import 'package:expense_tracker_app/widget/chart_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class Chart extends StatelessWidget {
   final List<Transaction> recentTransactions;
 
-  const Chart(this.recentTransactions);
+  Chart(this.recentTransactions);
 
   List<Map<String, Object>> get groupedTransactionValues {
     return List.generate(7, (index) {
@@ -26,8 +27,14 @@ class Chart extends StatelessWidget {
 
       return {
         'day': DateFormat.E().format(weekDay).substring(0, 1),
-        'amount': 9.99,
+        'amount': totalSum,
       };
+    });
+  }
+
+  double get maxSpending {
+    return groupedTransactionValues.fold(0.0, (sum, item) {
+      return sum + item['amount'];
     });
   }
 
@@ -39,7 +46,12 @@ class Chart extends StatelessWidget {
       margin: EdgeInsets.all(20),
       child: Row(
         children: groupedTransactionValues.map((data) {
-          return Text('${data['day']} : ${data['amount']}');
+          return ChartBar(
+              data['day'],
+              data['amount'],
+              maxSpending == 0.0
+                  ? 0.0
+                  : (data['amount'] as double) / maxSpending);
         }).toList(),
       ),
     );
