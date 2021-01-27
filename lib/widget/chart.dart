@@ -44,21 +44,31 @@ class Chart extends StatelessWidget {
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(20),
-      child: Padding(
-        padding: EdgeInsets.all(10.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: groupedTransactionValues.map((data) {
-            return Flexible(
-              fit: FlexFit.tight,
-              child: ChartBar(
-                  data['day'],
-                  data['amount'],
-                  maxSpending == 0.0
-                      ? 0.0
-                      : (data['amount'] as double) / maxSpending),
-            );
-          }).toList(),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(35),
+          border: Border.all(color: Colors.white.withOpacity(0.08)),
+          gradient: LinearGradient(colors: [
+            Colors.white.withOpacity(0.2),
+            Colors.white.withOpacity(0.05),
+          ]),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(10.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: groupedTransactionValues.map((data) {
+              return Flexible(
+                fit: FlexFit.tight,
+                child: ChartBar(
+                    data['day'],
+                    data['amount'],
+                    maxSpending == 0.0
+                        ? 0.0
+                        : (data['amount'] as double) / maxSpending),
+              );
+            }).toList(),
+          ),
         ),
       ),
     );
