@@ -20,31 +20,58 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Expense Tracker',
-      theme: ThemeData(
-          primarySwatch: Colors.purple,
-          accentColor: Colors.amber,
-          fontFamily: 'Quicksand',
-          textTheme: ThemeData.light().textTheme.copyWith(
-                headline6: TextStyle(
-                    fontFamily: 'Oxygen',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18),
-                button: TextStyle(color: Colors.white),
-              ),
-          appBarTheme: AppBarTheme(
-            textTheme: ThemeData.light().textTheme.copyWith(
-                  headline6: TextStyle(
-                    fontFamily: 'Oxygen',
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-          )),
-      home: MyHomePage(),
-    );
+    return Platform.isIOS
+        ? CupertinoApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Expense Tracker',
+            theme: CupertinoThemeData(
+              primaryColor: Colors.purple,
+              primaryContrastingColor: Colors.amber,
+              // fontFamily: 'Quicksand',
+              // textTheme: ThemeData.light().textTheme.copyWith(
+              //       headline6: TextStyle(
+              //           fontFamily: 'Oxygen',
+              //           fontWeight: FontWeight.bold,
+              //           fontSize: 18),
+              //       button: TextStyle(color: Colors.white),
+              //     ),
+              // appBarTheme: AppBarTheme(
+              //   textTheme: ThemeData.light().textTheme.copyWith(
+              //         headline6: TextStyle(
+              //           fontFamily: 'Oxygen',
+              //           fontSize: 20,
+              //           fontWeight: FontWeight.bold,
+              //         ),
+              //       ),
+              // )
+            ),
+            home: MyHomePage(),
+          )
+        : MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Expense Tracker',
+            theme: ThemeData(
+                primarySwatch: Colors.purple,
+                accentColor: Colors.amber,
+                fontFamily: 'Quicksand',
+                textTheme: ThemeData.light().textTheme.copyWith(
+                      headline6: TextStyle(
+                          fontFamily: 'Oxygen',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
+                      button: TextStyle(color: Colors.white),
+                    ),
+                appBarTheme: AppBarTheme(
+                  textTheme: ThemeData.light().textTheme.copyWith(
+                        headline6: TextStyle(
+                          fontFamily: 'Oxygen',
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                )),
+            home: MyHomePage(),
+          );
   }
 }
 
@@ -111,20 +138,32 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
-    final appBar = AppBar(
-      title: Text('Expense Tracker'),
-      actions: [
-        IconButton(
-          icon: Icon(Icons.add),
-          onPressed: () => _startAddNewTransaction(context),
-        )
-      ],
-    );
+    final PreferredSizeWidget appBar = Platform.isIOS
+        ? CupertinoNavigationBar(
+            middle: Text('Expense Tracker'),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GestureDetector(
+                  child: Icon(CupertinoIcons.add),
+                  onTap: () => _startAddNewTransaction(context),
+                )
+              ],
+            ))
+        : AppBar(
+            title: Text('Expense Tracker'),
+            actions: [
+              IconButton(
+                icon: Icon(Icons.add),
+                onPressed: () => _startAddNewTransaction(context),
+              )
+            ],
+          );
     final txListWidget = Container(
         height: (mediaQuery.size.height - appBar.preferredSize.height) * 0.7,
         child: TransactionList(_userTransactions, _deletedTransaction));
-
-    final pageBody = SingleChildScrollView(
+    final pageBody = SafeArea(
+        child: SingleChildScrollView(
       child: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
@@ -174,10 +213,13 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-    );
+    ));
 
     return Platform.isIOS
-        ? CupertinoPageScaffold(child: pageBody)
+        ? CupertinoPageScaffold(
+            child: pageBody,
+            navigationBar: appBar,
+          )
         : Scaffold(
             appBar: appBar,
             body: pageBody,
