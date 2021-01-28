@@ -51,13 +51,22 @@ class TransactionList extends StatelessWidget {
                   subtitle: Text(
                     DateFormat.yMMMMd().format(transactions[index].date),
                   ),
-                  trailing: IconButton(
-                    icon: Icon(Icons.delete),
-                    color: Theme.of(context).errorColor,
-                    onPressed: () {
-                      deleteTx(transactions[index]);
-                    },
-                  ),
+                  trailing: MediaQuery.of(context).size.width > 460
+                      ? FlatButton.icon(
+                          onPressed: () {
+                            deleteTx(transactions[index]);
+                          },
+                          icon: Icon(Icons.delete),
+                          label: Text('Delete'),
+                          textColor: Theme.of(context).errorColor,
+                        )
+                      : IconButton(
+                          icon: Icon(Icons.delete),
+                          color: Theme.of(context).errorColor,
+                          onPressed: () {
+                            deleteTx(transactions[index]);
+                          },
+                        ),
                 ),
               );
               // Here bellow another style for the transaction list, take the one you prefer !!
