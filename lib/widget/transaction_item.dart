@@ -12,9 +12,19 @@ class TransactionItem extends StatelessWidget {
   final Transaction transaction;
   final Function deleteTx;
 
+// decoration: BoxDecoration(
+//         borderRadius: BorderRadius.circular(35),
+//         border: Border.all(color: Colors.white.withOpacity(0.08)),
+//         gradient: LinearGradient(colors: [
+//           Colors.white.withOpacity(0.2),
+//           Colors.white.withOpacity(0.05),
+//         ]),
+//       ),
+
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Colors.white.withOpacity(0.2),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       elevation: 6,
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),

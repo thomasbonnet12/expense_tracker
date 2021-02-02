@@ -85,10 +85,10 @@ class _MyHomePageState extends State<MyHomePage> {
   final amountController = TextEditingController();
 
   final List<Transaction> _userTransactions = [
-    // Transaction(
-    //     id: 'T1', title: "New T-shirt", amount: 71.80, date: DateTime.now()),
-    // Transaction(
-    //     id: 'T2', title: "New Shoes", amount: 44.80, date: DateTime.now())
+    Transaction(
+        id: 'T1', title: "New T-shirt", amount: 71.80, date: DateTime.now()),
+    Transaction(
+        id: 'T2', title: "New Shoes", amount: 44.80, date: DateTime.now())
   ];
 
   bool _showChart = false;
@@ -212,31 +212,24 @@ class _MyHomePageState extends State<MyHomePage> {
         child: TransactionList(_userTransactions, _deletedTransaction));
     final pageBody = SafeArea(
         child: SingleChildScrollView(
-      child: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-          Color.fromRGBO(120, 32, 190, 0.91),
-          Color.fromRGBO(20, 10, 220, 0.71)
-        ])),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // isLandscape ? (same meaning that the line bellow)
-            if (isLandscape)
-              ..._buildLandscapeContent(
-                mediaQuery,
-                appBar,
-                txListWidget,
-              ),
-            if (!isLandscape)
-              ..._buildPortraitContent(
-                mediaQuery,
-                appBar,
-                txListWidget,
-              ),
-          ],
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          // isLandscape ? (same meaning that the line bellow)
+          if (isLandscape)
+            ..._buildLandscapeContent(
+              mediaQuery,
+              appBar,
+              txListWidget,
+            ),
+          if (!isLandscape)
+            ..._buildPortraitContent(
+              mediaQuery,
+              appBar,
+              txListWidget,
+            ),
+        ],
       ),
     ));
 
