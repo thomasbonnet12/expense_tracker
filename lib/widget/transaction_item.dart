@@ -1,5 +1,6 @@
 import 'package:expense_tracker_app/models/transaction.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 
 class TransactionItem extends StatelessWidget {
@@ -24,41 +25,53 @@ class TransactionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.white.withOpacity(0.2),
+      color: Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      elevation: 6,
+      elevation: 5,
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-      child: ListTile(
-        leading: CircleAvatar(
-          radius: 30,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FittedBox(child: Text('\$${transaction.amount}')),
+      child: Slidable(
+        actionPane: SlidableDrawerActionPane(),
+        child: ListTile(
+          leading: CircleAvatar(
+            radius: 30,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FittedBox(child: Text('\$${transaction.amount}')),
+            ),
           ),
+          title: Text(
+            transaction.title,
+            style: Theme.of(context).textTheme.headline6,
+          ),
+          subtitle: Text(
+            DateFormat.yMMMMd().format(transaction.date),
+          ),
+          // trailing: MediaQuery.of(context).size.width > 460
+          //     ? FlatButton.icon(
+          //         onPressed: () {
+          //           deleteTx(transaction);
+          //         },
+          //         icon: const Icon(Icons.delete),
+          //         label: const Text('Delete'),
+          //         textColor: Theme.of(context).errorColor,
+          //       )
+          //     : IconButton(
+          //         icon: const Icon(Icons.delete),
+          //         color: Theme.of(context).errorColor,
+          //         onPressed: () {
+          //           deleteTx(transaction.id);
+          //         },
+          //       ),
         ),
-        title: Text(
-          transaction.title,
-          style: Theme.of(context).textTheme.headline6,
-        ),
-        subtitle: Text(
-          DateFormat.yMMMMd().format(transaction.date),
-        ),
-        trailing: MediaQuery.of(context).size.width > 460
-            ? FlatButton.icon(
-                onPressed: () {
-                  deleteTx(transaction);
-                },
-                icon: const Icon(Icons.delete),
-                label: const Text('Delete'),
-                textColor: Theme.of(context).errorColor,
-              )
-            : IconButton(
-                icon: const Icon(Icons.delete),
-                color: Theme.of(context).errorColor,
-                onPressed: () {
-                  deleteTx(transaction);
-                },
-              ),
+        secondaryActions: [
+          IconSlideAction(
+            icon: Icons.remove,
+            color: Colors.red,
+            onTap: () {
+              deleteTx(transaction.id);
+            },
+          )
+        ],
       ),
     );
     // Here bellow another style for the transaction list, take the one you prefer !!
